@@ -14,6 +14,10 @@ fi
 
 input=$(cat "$1")
 
+if ! echo "$input" | grep -q -E '(\.\s+[a-z])|(!\s+[a-z])|(\?\s+[a-z])|^[a-z]'; then
+    echo "In that file all good"
+    exit 0
+fi
 
 result=$(echo "$input" | sed -e 's/\.\s\{1,\}[a-z]/\U&/g' \
                               -e 's/!\s\{1,\}[a-z]/\U&/g' \
