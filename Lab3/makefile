@@ -15,7 +15,13 @@ clean:
 
 test: $(EXECUTABLE)
 	@echo "Testing Morse Filter program..."
-	@./$(EXECUTABLE) < input.txt
+	@./$(EXECUTABLE) < input.txt > output.txt
+	@echo "Comparing output with right_result.txt..."
+	@if diff output.txt right_result.txt > /dev/null; then \
+		echo "Test passed!"; \
+	else \
+		echo "Test failed!"; \
+	fi
+	
 
 .PHONY: all clean test
-
